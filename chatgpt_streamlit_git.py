@@ -22,7 +22,9 @@ def chat_practice(question):
 
 st.title("Chatbot Practice")
 st.write("Please try and answer as many of the questions as possible.")
-# query = st.text_area("Enter your query here:")
+st.write("Note: Do not add personal information "
+         "like your name, address, email, and phone number into the form.")
+
 article_title = st.text_input("What is the article title?")
 article_author = st.text_input("Who is the author?")
 pub_date = st.text_input("What date was the article published on?")
