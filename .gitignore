@@ -1,0 +1,4 @@
+venv
+.idea
+main.py
+chatgpt_streamlit.py
