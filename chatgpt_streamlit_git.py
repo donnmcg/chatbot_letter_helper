@@ -6,6 +6,7 @@ try:
     API_KEY = os.getenv("OPENAI_API_KEY_Practice")
 except AttributeError:
     API_KEY = st.secrets["API_KEY"]
+    print("here")
 
 openai.api_key = API_KEY
 
