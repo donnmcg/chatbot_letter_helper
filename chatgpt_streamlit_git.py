@@ -4,8 +4,10 @@ import streamlit as st
 
 try:
     API_KEY = os.getenv("OPENAI_API_KEY_Practice")
+    print("here os")
 except AttributeError:
     API_KEY = st.secrets["API_KEY"]
+    print("here")
 
 openai.api_key = API_KEY
 
