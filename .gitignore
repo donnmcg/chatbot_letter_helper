@@ -1,5 +1,6 @@
 venv
 .idea
 docs
+.streamlit
 main.py
 chatgpt_streamlit.py

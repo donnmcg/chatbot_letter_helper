@@ -21,7 +21,8 @@ def chat_practice(question):
 
 
 st.title("Letter to the Editor")
-st.write("Please try and answer as many of the questions as possible.")
+st.write("It isn't necessary to answer every question. "
+         "But you'll need to provide information on the issue or subject.")
 st.write("Note: Do not add personal information "
          "like your name, address, email, and phone number into the form.")
 
@@ -34,18 +35,19 @@ topic = st.text_area("What is the issue or subject you want to address "
 tone = st.text_input("What is the tone of your letter? "
                      "Is it persuasive, informative, argumentative, etc.?",
                      placeholder="Persuasive")
-length = st.text_input("How long should the article be? 300 words?",
-                       placeholder="300")
+length = st.text_input("How long should the article be?",
+                       placeholder="150 words")
 personal_experience = st.text_area("Do you have any personal experience"
                                    " related to the topic?")
 evidence = st.text_area("Do you have any evidence or statistics to support"
                         " your argument?")
 call_to_action = st.text_area("What action do you want the readers or the "
                               "publication to take after reading your letter?")
+password = st.text_input("Password: ", type="password")
 ask_button = st.button("Ask")
 
 if not length:
-    length = "300"
+    length = "150"
 if not tone:
     tone = "persuasive"
 
@@ -57,13 +59,18 @@ The response is to this article:
     Title: {article_title} 
     Author: {article_author}
     Date of publication: {pub_date}
-The tone of my response: {tone}
-My preferred article length: {length}
-Evidence I'm providing: {evidence}
+The tone of my response should be: {tone}
+My preferred article length in words: {length}
+Evidence that could be used: {evidence}
 The call to action I'd like to appear: {call_to_action}
 """
+# When button pressed:
 if ask_button:
-    # response = chat_practice(query)
-    response = chat_practice(str(query_combined))
-    st.write(response["choices"][0]["message"]["content"])
-    st.write(response["usage"]["total_tokens"])
+    # Only run the query if the password is correct
+    if password == st.secrets["PASSWORD"]:
+        response = chat_practice(str(query_combined))
+        st.write(response["choices"][0]["message"]["content"])
+        st.write(response["usage"]["total_tokens"])
+
+    else:
+        st.info("Please enter the required password.")
