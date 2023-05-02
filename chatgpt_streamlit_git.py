@@ -60,7 +60,7 @@ The response is to this article:
     Author: {article_author}
     Date of publication: {pub_date}
 The tone of my response should be: {tone}
-My preferred article length in words: {length}
+Try to keep it short. My preferred article length in words is: {length}
 Evidence that could be used: {evidence}
 The call to action I'd like to appear: {call_to_action}
 """
@@ -68,9 +68,16 @@ The call to action I'd like to appear: {call_to_action}
 if ask_button:
     # Only run the query if the password is correct
     if password == st.secrets["PASSWORD"]:
-        response = chat_practice(str(query_combined))
-        st.write(response["choices"][0]["message"]["content"])
-        st.write(response["usage"]["total_tokens"])
-
+        moderation_response = openai.Moderation.create(
+            input=query_combined
+        )
+        output = moderation_response['results'][0]['flagged']
+        if output is False:
+            response = chat_practice(str(query_combined))
+            st.write(response["choices"][0]["message"]["content"])
+            st.write(response["usage"]["total_tokens"])
+        else:
+            st.info("Your request has been flagged as against usage policies. "
+                    "Please revise your answers and try again.")
     else:
         st.info("Please enter the required password.")
