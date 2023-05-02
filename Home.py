@@ -33,7 +33,7 @@ article_title = st.text_input("What is the article title?",
 article_author = st.text_input("Who is the author?",
                                placeholder="Author")
 pub_date = st.text_input("What date was the article published on?",
-                         placeholder="DD/MM/YYYY")
+                         placeholder="Date")
 support = st.text_input("Do you support the views in the article?",
                         help="This can be a yes or no answer. Or you can write"
                              " about how you support some points and not "
