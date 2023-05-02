@@ -21,14 +21,19 @@ def chat_practice(question):
 
 
 st.title("Letter to the Editor")
-st.write("It isn't necessary to answer every question. "
-         "But you'll need to provide information on the issue or subject.")
+st.subheader("Use ChatGPT to help you write a Letter to the Editor")
+st.write('Fill in the boxes below, enter the password and press "Ask".')
+st.write("It isn't necessary to answer every question.")
+# st.write("But you need to provide information on the issue or subject.")
 st.write("Note: Do not add personal information "
-         "like your name, address, email, and phone number into the form.")
+         "like your name, address and email into the form below.")
 
-article_title = st.text_input("What is the article title?")
-article_author = st.text_input("Who is the author?")
-pub_date = st.text_input("What date was the article published on?")
+article_title = st.text_input("What is the article title?",
+                              placeholder="Title")
+article_author = st.text_input("Who is the author?",
+                               placeholder="Author")
+pub_date = st.text_input("What date was the article published on?",
+                         placeholder="Date")
 support = st.text_input("Do you support the views in the article?")
 topic = st.text_area("What is the issue or subject you want to address "
                      "in your letter to the editor?")
@@ -46,6 +51,12 @@ call_to_action = st.text_area("What action do you want the readers or the "
 password = st.text_input("Password: ", type="password")
 ask_button = st.button("Ask")
 
+if not article_title:
+    article_title = "[Article Title]"
+if not article_author:
+    article_author = "[Author]"
+if not pub_date:
+    pub_date = "[Date]"
 if not length:
     length = "150"
 if not tone:
