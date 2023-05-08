@@ -80,6 +80,7 @@ The response is to this article:
     Date of publication: {pub_date}
 The tone of my response should be: {tone}
 Try to keep it short. My preferred article length in words is: {length}
+This is my personal experience: {personal_experience}
 Evidence that could be used: {evidence}
 The call to action I'd like to appear: {call_to_action}
 """
