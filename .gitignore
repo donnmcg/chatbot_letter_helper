@@ -2,7 +2,7 @@ venv
 .idea
 docs
 .streamlit
+old
 main.py
-chatgpt_streamlit.py
 chatgpt_general_chat.py
-succinct.py
+/pages/3How_it_Works.py
