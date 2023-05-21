@@ -33,8 +33,10 @@ topic = st.text_area("What is the issue or subject you want to address "
 tone = st.text_input("What is the tone of your letter? "
                      "Is it persuasive, informative, argumentative, etc.?",
                      placeholder="Persuasive")
-length = st.text_input("How long should the article be?",
-                       placeholder="150 words")
+length = st.text_input("How long should the article roughly be?",
+                       placeholder="Keep it short. Around 150 words.",
+                       help="This is more of a guideline than a hard target. "
+                            "The model may over- or undershoot.")
 password = st.text_input("Password: ", type="password")
 more = st.checkbox("More options")
 if more:
@@ -56,7 +58,7 @@ if not tone:
 query_combined = f"""
 Please help me write a letter to the editor about: {topic}.
 The tone of my response should be: {tone}.
-My preferred article length in words is: {length}.
+My preferred article length is: {length}.
 """
 
 if more:
