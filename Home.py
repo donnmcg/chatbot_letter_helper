@@ -23,13 +23,13 @@ def send_chat_request(question):
 
 
 # Set up the page
-container = st.container()
-container.title("Letter to the Editor")
-container.subheader("Use AI to help you write a Letter to the Editor")
-container.markdown(
-    'Fill in the boxes below, enter the password and press "Ask".')
-container.markdown("*Note: Do not add personal information "
-                   "like your name, address and email into the form below.*")
+st.title("Letter to the Editor")
+st.subheader("Use AI to help you write a Letter to the Editor")
+st.markdown(
+    'Fill in the boxes below. Enter the password. And press "Ask". Do not include personal information '
+                   'like your name, address and email.')
+# st.markdown("*Note: Do not add personal information "
+#                    "like your name, address and email into the form below.*")
 st.markdown("***")
 
 topic = st.text_area("What is the issue or subject you want to address "
