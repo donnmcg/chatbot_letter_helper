@@ -5,6 +5,9 @@ API_KEY = st.secrets["API_KEY"]
 openai.api_key = API_KEY
 
 
+# with open('style.css') as f:
+#     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
+
 def send_chat_request(question):
     """
     :param question: should be a str in the form of a question.
@@ -20,34 +23,51 @@ def send_chat_request(question):
 
 
 # Set up the page
-st.title("Letter to the Editor")
-st.subheader("Use ChatGPT to help you write a Letter to the Editor")
-st.write('Fill in the boxes below, enter the password and press "Ask".')
-st.write("Note: Do not add personal information "
-         "like your name, address and email into the form below.")
+container = st.container()
+container.title("Letter to the Editor")
+container.subheader("Use AI to help you write a Letter to the Editor")
+container.markdown(
+    'Fill in the boxes below, enter the password and press "Ask".')
+container.markdown("*Note: Do not add personal information "
+                   "like your name, address and email into the form below.*")
+st.markdown("***")
 
 topic = st.text_area("What is the issue or subject you want to address "
                      "in your letter to the editor?",
                      help="Describe what the article is about and what "
                           "your own thoughts are on the subject.")
+st.markdown("#")
 tone = st.text_input("What is the tone of your letter? "
                      "Is it persuasive, informative, argumentative, etc.?",
                      placeholder="Persuasive")
+st.markdown("#")
 length = st.text_input("How long should the article roughly be?",
                        placeholder="Keep it short. Around 150 words.",
                        help="This is more of a guideline than a hard target. "
                             "The model may over- or undershoot.")
-password = st.text_input("Password: ", type="password")
+st.markdown("#")
 more = st.checkbox("More options")
+radio_list = {"My own persona": "Describe yourself in a few short sentences.",
+               "A worried parent": "I'm a parent and I'm worried about the future for my kids.",
+               "A former Liberal voter": "I'm a long time Liberal Party voter, but I've had enough.",
+               "Not a greenie but..": "I wouldn't consider myself a greenie but they seem to be making a lot of sense in this area."}
 if more:
-    personal_experience = st.text_area("Do you have any personal experience"
-                                       " related to the topic?")
-    evidence = st.text_area("Do you have any evidence or statistics to support"
-                            " your argument?",
-                            help="You could paste some relevant facts and other information.")
-    call_to_action = st.text_area("What action do you want the readers or the "
-                                  "publication to take after reading your letter?")
+    st.write("Give your letter some character by creating a persona.")
+    radio = st.radio("Select an option", radio_list.keys())
+    print(radio)
+    if radio == list(radio_list.keys())[0]:
+        personal_experience = st.text_area(
+            "Describe yourself in a few short sentences.")
+    else:
+        personal_experience = st.text_area("You can edit this to suit.", value=radio_list[radio])
+        # st.write(radio_list[radio])
+
+st.markdown("***")
+password = st.text_input("Password: ", type="password")
+st.markdown("#")
+
 ask_button = st.button("Ask")
+st.markdown("***")
 
 if not length:
     length = "150"
@@ -63,9 +83,7 @@ My preferred article length is: {length}.
 
 if more:
     query_combined = query_combined + \
-                     f"""This is my personal experience: {personal_experience}
-Evidence that could be used: {evidence}
-The call to action I'd like to appear: {call_to_action}"""
+                     f"""Try and make the style of writing based around this persona: {personal_experience}"""
 
 # When button pressed:
 if ask_button:
