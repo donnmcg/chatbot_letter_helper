@@ -54,7 +54,6 @@ radio_list = {"My own persona": "Describe yourself in a few short sentences.",
 if more:
     st.write("Give your letter some character by creating a persona.")
     radio = st.radio("Select an option", radio_list.keys())
-    print(radio)
     if radio == list(radio_list.keys())[0]:
         personal_experience = st.text_area(
             "Describe yourself in a few short sentences.")
