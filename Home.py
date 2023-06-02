@@ -1,26 +1,8 @@
-import openai
 import streamlit as st
-
-API_KEY = st.secrets["API_KEY"]
-openai.api_key = API_KEY
-
+from files.gpt_function import send_chat_request, moderation_check
 
 # with open('style.css') as f:
 #     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
-
-def send_chat_request(question):
-    """
-    :param question: should be a str in the form of a question.
-    :return: a str response from ChatGPT.
-    """
-    completion = openai.ChatCompletion.create(
-        model="gpt-3.5-turbo",
-        messages=[
-            {"role": "user", "content": question}
-        ]
-    )
-    return completion
-
 
 # Set up the page
 st.title("Letter to the Editor")
@@ -115,10 +97,8 @@ if ask_button:
         # Show a message to show that the request is being made.
         with st.spinner(text="Please wait..."):
             # Perform a moderation check.
-            moderation_response = openai.Moderation.create(
-                input=query_combined
-            )
-        output = moderation_response['results'][0]['flagged']
+            output = moderation_check(query_combined)
+
         # If moderation ok (False). Then put the request through.
         if output is False:
             # Let the user know there is something happening with a spinner.
