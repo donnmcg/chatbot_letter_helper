@@ -27,16 +27,19 @@ length = st.text_input("How long should the article roughly be?",
                             "The model may over- or undershoot.")
 st.markdown("#")
 more = st.checkbox("More options")  # Allow user to add more options.
-radio_list = {"My own persona": "Describe yourself in a few short sentences.",
-              "A worried parent": "I'm a parent and I'm worried about the "
-                                  "future for my kids.",
+radio_list = {"My own persona": "Describe yourself in a sentence or more.",
+              "A worried parent": "I'm a parent and I'm worried about what "
+                                  "the future has in store for my kids.",
               "A former conservative": "I've always held conservative "
                                        "beliefs, but I'm beginning to think "
                                        "that things might be better if I "
-                                       "vote differently.",
-              "Not a greenie but..": "I wouldn't consider myself a greenie "
-                                     "but they seem to be making a lot of "
-                                     "sense in this area."}
+                                       "change my views.",
+              "Not a greenie but..": "I wouldn't consider myself a 'greenie' "
+                                     "by any stretch of the imagination, "
+                                     "but I think the people that care about "
+                                     "our environment have some good ideas "
+                                     "sometimes."}
+
 # If user selects "More", then show other options.
 if more:
     st.write("Give your letter some character by creating a persona.")
