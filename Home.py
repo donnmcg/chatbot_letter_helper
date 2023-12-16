@@ -1,5 +1,6 @@
 import streamlit as st
 from files.gpt_function import send_chat_request, moderation_check
+from files.gemini_function import send_gemini_query
 
 # with open('style.css') as f:
 #     st.markdown(f'<style>{f.read()}</style>', unsafe_allow_html=True)
@@ -97,22 +98,31 @@ if ask_button:
         st.markdown("***")  # Add a line to separate stuff.
     # Only run the query if the password is correct
     if password == st.secrets["PASSWORD"]:
-        # Show a message to show that the request is being made.
-        with st.spinner(text="Please wait..."):
-            # Perform a moderation check.
-            output = moderation_check(query_combined)
+        # Using GPT:
+        # # Show a message to show that the request is being made.
+        # with st.spinner(text="Please wait..."):
+        #     # Perform a moderation check.
+        #     output = moderation_check(query_combined)
+        #
+        # # If moderation ok (False). Then put the request through.
+        # if output is False:
+        #     # Let the user know there is something happening with a spinner.
+        #     with st.spinner(text="Please wait..."):
+        #         st.markdown("**Model Response:**")
+        #         response = send_chat_request(str(query_combined))
+        #     st.write(response["choices"][0]["message"]["content"])
+        #     # How many tokens were used:
+        #     # st.write(response["usage"]["total_tokens"])
+        # else:
+        #     st.info("Your request has been flagged as against usage policies. "
+        #             "Please revise your answers and try again.")
 
-        # If moderation ok (False). Then put the request through.
-        if output is False:
-            # Let the user know there is something happening with a spinner.
-            with st.spinner(text="Please wait..."):
-                st.markdown("**Model Response:**")
-                response = send_chat_request(str(query_combined))
-            st.write(response["choices"][0]["message"]["content"])
-            # How many tokens were used:
-            # st.write(response["usage"]["total_tokens"])
-        else:
-            st.info("Your request has been flagged as against usage policies. "
-                    "Please revise your answers and try again.")
+        # Using Gemini:
+        # Let the user know there is something happening with a spinner.
+        with st.spinner(text="Please wait..."):
+            st.markdown("**Model Response:**")
+            response = send_gemini_query(str(query_combined))
+            # send_chat_request(str(query_combined))
+        st.write(response.text)
     else:
         st.info("Please enter the required password.")
