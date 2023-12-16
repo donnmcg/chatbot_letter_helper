@@ -121,8 +121,10 @@ if ask_button:
         # Let the user know there is something happening with a spinner.
         with st.spinner(text="Please wait..."):
             st.markdown("**Model Response:**")
+            # Send query to gemini
             response = send_gemini_query(str(query_combined))
             # send_chat_request(str(query_combined))
+        # Write the response from Gemini
         st.write(response.text)
     else:
         st.info("Please enter the required password.")
