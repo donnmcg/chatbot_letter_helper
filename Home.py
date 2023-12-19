@@ -123,7 +123,6 @@ if ask_button:
             st.markdown("**Model Response:**")
             # Send query to gemini
             response = send_gemini_query(str(query_combined))
-            # send_chat_request(str(query_combined))
         # Write the response from Gemini
         st.write(response.text)
     else:
