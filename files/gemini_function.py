@@ -6,10 +6,10 @@ genai.configure(api_key=GEMINI_API_KEY)
 
 
 def send_gemini_query(query_text):
+    # Select the gemini model
     model = genai.GenerativeModel('gemini-pro')
-
+    # Get response
     response = model.generate_content(query_text)
-
     return response
 
 
